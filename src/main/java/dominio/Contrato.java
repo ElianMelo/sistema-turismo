@@ -9,6 +9,7 @@ public class Contrato implements Serializable {
 	private Integer codContrato;
 	private Date data;
 	private Cliente cliente;
+	private Pacote pacote;
 	
 	public Contrato(){
 		
@@ -44,6 +45,14 @@ public class Contrato implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public Pacote getPacote() {
+		return pacote;
+	}
+
+	public void setPacote(Pacote pacote) {
+		this.pacote = pacote;
 	}
 
 	@Override

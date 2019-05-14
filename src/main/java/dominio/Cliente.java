@@ -93,7 +93,11 @@ public class Cliente implements Serializable {
 	public List<Contrato> getContratos() {
 		return contratos;
 	}
-	
+
+	public void setContratos(List<Contrato> contratos) {
+		this.contratos = contratos;
+	}
+
 	public void addContrato(Contrato x) {
 		this.contratos.add(x);
 		x.setCliente(this);
