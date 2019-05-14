@@ -15,12 +15,14 @@ public class Contrato implements Serializable {
 		
 	}
 
-	public Contrato(Integer codContrato, Date data, Cliente cliente) {
+	public Contrato(Integer codContrato, Date data, Cliente cliente, Pacote pacote) {
 		super();
 		this.codContrato = codContrato;
 		this.data = data;
 		this.cliente = cliente;
 		cliente.addContrato(this);
+		this.pacote = pacote;
+		pacote.addContrato(this);
 	}
 
 	public Integer getCodContrato() {

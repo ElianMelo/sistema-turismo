@@ -11,16 +11,19 @@ public class Pacote implements Serializable {
 	private String nome;
 	private Integer diarias;
 	private List<Contrato> contratos = new ArrayList<>();
+	private Hotel hotel;
 	
 	public Pacote() {
 		
 	}
 
-	public Pacote(Integer codPacote, String nome, Integer diarias) {
+	public Pacote(Integer codPacote, String nome, Integer diarias, Hotel hotel) {
 		super();
 		this.codPacote = codPacote;
 		this.nome = nome;
 		this.diarias = diarias;
+		this.hotel = hotel;
+		hotel.addPacote(this);
 	}
 
 	public Integer getCodPacote() {
@@ -62,6 +65,14 @@ public class Pacote implements Serializable {
 	
 	public void removeContrato(Contrato x) {
 		this.contratos.remove(x);
+	}
+	
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
 	}
 
 	@Override
