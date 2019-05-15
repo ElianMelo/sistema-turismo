@@ -12,6 +12,7 @@ public class Pacote implements Serializable {
 	private Integer diarias;
 	private List<Contrato> contratos = new ArrayList<>();
 	private Hotel hotel;
+	private List<Item> itens = new ArrayList<>();
 	
 	public Pacote() {
 		
@@ -73,6 +74,23 @@ public class Pacote implements Serializable {
 
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
+	}
+
+	public List<Item> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<Item> itens) {
+		this.itens = itens;
+	}
+	
+	public void addItem(Item x) {
+		this.itens.add(x);
+		x.setPacote(this);
+	}
+	
+	public void removeItem(Item x) {
+		this.itens.remove(x);
 	}
 
 	@Override
