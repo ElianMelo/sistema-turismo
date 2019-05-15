@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Context reloadable="true">
+
+	<!-- Configura o JDBC -->
+	<Resource name="jdbc/datasource"
+	auth="Container"
+	type="javax.sql.DataSource"
+	maxActive="100"
+	maxIdle="30"
+	maxWait="10000"
+	username="root"
+	password=""
+	driverClassName="com.mysql.jdbc.Driver"
+	url="jdbc:mysql://localhost:3306/turismo?autoReconnect=true"/>
+</Context>
+
+<!--
+Nome do autor: Elian Melo Morais
+Data de criação do arquivo: xx/xx/2019
+Resumo: Arquivo XML que configura o JDBC para persistir no banco de dados
+Referência ao enunciado/origem do exercício: PDS1 – PROVA SIMULADA QUESTÃO 2
+-->
