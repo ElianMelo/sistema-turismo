@@ -11,22 +11,57 @@ Referência ao enunciado/origem do exercício: PDS1 – PROVA SIMULADA QUESTÃO 
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
+  	<!-- Dependências de nossa aplicação web com Java -->
 	<dependencies>
-		<dependency>
-    		<groupId>javax.servlet</groupId>
-    		<artifactId>javax.servlet-api</artifactId>
-    		<version>3.1.0</version>
-    		<scope>provided</scope>
-		</dependency>
-
+	
+		<!-- Dependência do Java Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- Dependências do JPA (Java Persistence API) -->
+		
+		<!-- Implementação do JPA (Hibernate) -->
+		<dependency>
+		    <groupId>org.hibernate.javax.persistence</groupId>
+		    <artifactId>hibernate-jpa-2.1-api</artifactId>
+		    <version>1.0.0.Final</version>
+		</dependency>
+		
+		<!-- Classe fundamental do JPA (EntityManager) -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>5.0.6.Final</version>
+		</dependency>
+		
+		<!-- Dependência do MySQL Connector -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.17</version>
+		</dependency>
+		
+		<!-- Dependência do JTA (Java Transaction API) -->
+		<dependency>
+		    <groupId>javax.transaction</groupId>
+		    <artifactId>jta</artifactId>
+		    <version>1.1</version>
+		</dependency>
+		
+		<!-- Dependência do JSTL (Utilizado no front-end) -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		
    	</dependencies>
    	
+   	<!-- Atualiza o Java para a versão 1.8 -->
    	<build>
 		<plugins>
 			<plugin>
