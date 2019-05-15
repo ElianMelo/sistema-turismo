@@ -8,17 +8,20 @@ public class Item implements Serializable{
 	private Integer codItem;
 	private Integer ordem;
 	private Pacote pacote;
+	private Passeio passeio;
 	
 	public Item() {
 		
 	}
 	
-	public Item(Integer codItem, Integer ordem, Pacote pacote) {
+	public Item(Integer codItem, Integer ordem, Pacote pacote, Passeio passeio) {
 		super();
 		this.codItem = codItem;
 		this.ordem = ordem;
 		this.pacote = pacote;
 		pacote.addItem(this);
+		this.passeio = passeio;
+		passeio.addItem(this);
 	}
 
 	public Integer getCodItem() {
@@ -43,6 +46,14 @@ public class Item implements Serializable{
 
 	public void setPacote(Pacote pacote) {
 		this.pacote = pacote;
+	}
+	
+	public Passeio getPasseio() {
+		return passeio;
+	}
+
+	public void setPasseio(Passeio passeio) {
+		this.passeio = passeio;
 	}
 
 	@Override
