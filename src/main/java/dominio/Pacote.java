@@ -1,3 +1,9 @@
+/*
+Nome do autor: Elian Melo Morais
+Data de criação do arquivo: 14/05/2019
+Resumo: Classe que representa um pacote com itens e um hotel oferecidos a um cliente
+Referência ao enunciado/origem do exercício: PDS1 – PROVA SIMULADA QUESTÃO 2
+*/
 package dominio;
 
 import java.io.Serializable;
@@ -124,6 +130,7 @@ public class Pacote implements Serializable {
 		return "Pacote [codPacote=" + codPacote + ", nome=" + nome + ", diarias=" + diarias + "]";
 	}
 	
+	// Método que calcula o preço total de todos os passeios
 	public BigDecimal precoPasseios() {
 		BigDecimal resultado = new BigDecimal("0.00");
 		for(Item item : itens) {
@@ -132,6 +139,7 @@ public class Pacote implements Serializable {
 		return resultado;
 	}
 	
+	// Método que calcula o preço total do pacote (incluindo os passeios)
 	public BigDecimal precoTotal() {
 		BigDecimal resultado = new BigDecimal("0.00");
 		resultado = resultado.add(precoPasseios());

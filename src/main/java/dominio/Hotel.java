@@ -1,3 +1,9 @@
+/*
+Nome do autor: Elian Melo Morais
+Data de criação do arquivo: 14/05/2019
+Resumo: Classe que representa um hotel estipulado pelo contrato para hospedagem do cliente
+Referência ao enunciado/origem do exercício: PDS1 – PROVA SIMULADA QUESTÃO 2
+*/
 package dominio;
 
 import java.io.Serializable;

@@ -1,3 +1,9 @@
+/*
+Nome do autor: Elian Melo Morais
+Data de criação do arquivo: 15/05/2019
+Resumo: Classe que representa um dos itens de um pacote estipulando um passeio para si
+Referência ao enunciado/origem do exercício: PDS1 – PROVA SIMULADA QUESTÃO 2
+*/
 package dominio;
 
 import java.io.Serializable;
