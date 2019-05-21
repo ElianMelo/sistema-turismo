@@ -12,6 +12,9 @@ import java.util.List;
 import dominio.Hotel;
 
 public interface HotelDao {
-	public List<Hotel> buscaHoteis(String nome, BigDecimal precoMin, BigDecimal precoMax);
+	public void inserirAtualizar(Hotel x);
+	public void excluir(Hotel x);
 	public Hotel buscar(int cod);
+	public List<Hotel> buscarTodos();
+	public List<Hotel> buscaHoteis(String nome, BigDecimal precoMin, BigDecimal precoMax);
 }

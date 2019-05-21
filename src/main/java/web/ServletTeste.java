@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ClienteDao;
+import dao.HotelDao;
 import dao.impl.DaoFactory;
 import dominio.Cliente;
 import dominio.Contrato;
@@ -96,8 +98,13 @@ public class ServletTeste extends HttpServlet {
 			
 			Cliente joao = clienteDao.buscar(1);
 			
-			response.getWriter().append("\nJoão: " + joao);
-			response.getWriter().append("\nTodos os Clientes: " + clienteDao.buscarTodos());
+			response.getWriter().append("\n\nJoão: " + joao);
+			response.getWriter().append("\n\nTodos os Clientes: " + clienteDao.buscarTodos());
+			
+			HotelDao hotelDao = DaoFactory.criarHotelDao();
+			List<Hotel> hotel = hotelDao.buscaHoteis("a", new BigDecimal("100"), new BigDecimal("1500"));
+			
+			response.getWriter().append("\n\nHotel: " + hotel);
 			
 		} catch (ParseException e) {
 			response.getWriter().append("\nDeu ruim galera corre");
