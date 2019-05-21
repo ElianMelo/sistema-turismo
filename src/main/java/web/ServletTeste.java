@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ClienteDao;
+import dao.impl.DaoFactory;
 import dominio.Cliente;
 import dominio.Contrato;
 import dominio.Hotel;
@@ -61,7 +63,7 @@ public class ServletTeste extends HttpServlet {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistema.turismo");
 			EntityManager em = emf.createEntityManager();
 			
-			em.getTransaction().begin();
+			/*em.getTransaction().begin();
 			
 			em.persist(cliente1);
 			em.persist(cliente2);
@@ -79,8 +81,8 @@ public class ServletTeste extends HttpServlet {
 			em.getTransaction().commit();
 			
 			em.close();
-			emf.close();
-			
+			emf.close();*/
+		
 			response.getWriter().append("\nBanco de dados do sucesso");
 			
 			response.getWriter().append("\nPreço passeios pacote1: " + pacote1.precoPasseios());
@@ -88,11 +90,18 @@ public class ServletTeste extends HttpServlet {
 			response.getWriter().append("\nPreço passeios pacote1: " + pacote2.precoPasseios());
 			response.getWriter().append("\nPreço total pacote1: " + pacote2.precoTotal());
 			
+			ClienteDao clienteDao = DaoFactory.criarClienteDao();
+			
+			clienteDao.inserirAtualizar(cliente1);
+			
+			Cliente joao = clienteDao.buscar(1);
+			
+			response.getWriter().append("\nJoão: " + joao);
+			response.getWriter().append("\nTodos os Clientes: " + clienteDao.buscarTodos());
+			
 		} catch (ParseException e) {
 			response.getWriter().append("\nDeu ruim galera corre");
 		}
-
-		
 
 	}
 
