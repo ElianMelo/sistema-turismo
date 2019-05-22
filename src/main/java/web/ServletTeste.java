@@ -23,8 +23,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ClienteDao;
+import dao.ContratoDao;
 import dao.HotelDao;
+import dao.ItemDao;
+import dao.PacoteDao;
+import dao.PasseioDao;
 import dao.impl.DaoFactory;
+import dao.impl.Transaction;
 import dominio.Cliente;
 import dominio.Contrato;
 import dominio.Hotel;
@@ -61,29 +66,30 @@ public class ServletTeste extends HttpServlet {
 			
 			Contrato contrato1 = new Contrato(null, sdf.parse("01/01/2010"), cliente1, pacote1);
 			Contrato contrato2 = new Contrato(null, sdf.parse("02/02/2020"), cliente2, pacote2);
+
+			ClienteDao clienteDao = DaoFactory.criarClienteDao();
+			HotelDao hotelDao = DaoFactory.criarHotelDao();
+			PasseioDao passeioDao = DaoFactory.criarPasseioDao();
+			PacoteDao pacoteDao = DaoFactory.criarPacoteDao();
+			ItemDao itemDao = DaoFactory.criarItemDao();
+			ContratoDao contratoDao = DaoFactory.criarContratoDao();
 			
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistema.turismo");
-			EntityManager em = emf.createEntityManager();
+			/*Transaction.begin();
 			
-			/*em.getTransaction().begin();
+			clienteDao.inserirAtualizar(cliente1);
+			clienteDao.inserirAtualizar(cliente2);
+			hotelDao.inserirAtualizar(hotel1);
+			hotelDao.inserirAtualizar(hotel2);
+			passeioDao.inserirAtualizar(passeio1);
+			passeioDao.inserirAtualizar(passeio2);
+			pacoteDao.inserirAtualizar(pacote1);
+			pacoteDao.inserirAtualizar(pacote2);
+			itemDao.inserirAtualizar(item1);
+			itemDao.inserirAtualizar(item2);
+			contratoDao.inserirAtualizar(contrato1);
+			contratoDao.inserirAtualizar(contrato2);
 			
-			em.persist(cliente1);
-			em.persist(cliente2);
-			em.persist(hotel1);
-			em.persist(hotel2);
-			em.persist(passeio1);
-			em.persist(passeio2);
-			em.persist(pacote1);
-			em.persist(pacote2);
-			em.persist(item1);
-			em.persist(item2);
-			em.persist(contrato1);
-			em.persist(contrato2);
-			
-			em.getTransaction().commit();
-			
-			em.close();
-			emf.close();*/
+			Transaction.commit();*/
 		
 			response.getWriter().append("\nBanco de dados do sucesso");
 			
@@ -92,16 +98,11 @@ public class ServletTeste extends HttpServlet {
 			response.getWriter().append("\nPreço passeios pacote1: " + pacote2.precoPasseios());
 			response.getWriter().append("\nPreço total pacote1: " + pacote2.precoTotal());
 			
-			ClienteDao clienteDao = DaoFactory.criarClienteDao();
-			
-			clienteDao.inserirAtualizar(cliente1);
-			
 			Cliente joao = clienteDao.buscar(1);
 			
 			response.getWriter().append("\n\nJoão: " + joao);
 			response.getWriter().append("\n\nTodos os Clientes: " + clienteDao.buscarTodos());
 			
-			HotelDao hotelDao = DaoFactory.criarHotelDao();
 			List<Hotel> hotel = hotelDao.buscaHoteis("a", new BigDecimal("100"), new BigDecimal("1500"));
 			
 			response.getWriter().append("\n\nHotel: " + hotel);
