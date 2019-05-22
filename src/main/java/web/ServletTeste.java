@@ -13,29 +13,24 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ClienteDao;
-import dao.ContratoDao;
-import dao.HotelDao;
-import dao.ItemDao;
-import dao.PacoteDao;
-import dao.PasseioDao;
-import dao.impl.DaoFactory;
-import dao.impl.Transaction;
 import dominio.Cliente;
 import dominio.Contrato;
 import dominio.Hotel;
 import dominio.Item;
 import dominio.Pacote;
 import dominio.Passeio;
+import servico.ClienteServico;
+import servico.ContratoServico;
+import servico.HotelServico;
+import servico.ItemServico;
+import servico.PacoteServico;
+import servico.PasseioServico;
 
 @WebServlet("/teste")
 public class ServletTeste extends HttpServlet {
@@ -66,30 +61,26 @@ public class ServletTeste extends HttpServlet {
 			
 			Contrato contrato1 = new Contrato(null, sdf.parse("01/01/2010"), cliente1, pacote1);
 			Contrato contrato2 = new Contrato(null, sdf.parse("02/02/2020"), cliente2, pacote2);
+			
+			ClienteServico cliente = new ClienteServico();
+			HotelServico hotel = new HotelServico();
+			PasseioServico passeio = new PasseioServico();
+			PacoteServico pacote = new PacoteServico();
+			ItemServico item = new ItemServico();
+			ContratoServico contrato = new ContratoServico();
 
-			ClienteDao clienteDao = DaoFactory.criarClienteDao();
-			HotelDao hotelDao = DaoFactory.criarHotelDao();
-			PasseioDao passeioDao = DaoFactory.criarPasseioDao();
-			PacoteDao pacoteDao = DaoFactory.criarPacoteDao();
-			ItemDao itemDao = DaoFactory.criarItemDao();
-			ContratoDao contratoDao = DaoFactory.criarContratoDao();
-			
-			/*Transaction.begin();
-			
-			clienteDao.inserirAtualizar(cliente1);
-			clienteDao.inserirAtualizar(cliente2);
-			hotelDao.inserirAtualizar(hotel1);
-			hotelDao.inserirAtualizar(hotel2);
-			passeioDao.inserirAtualizar(passeio1);
-			passeioDao.inserirAtualizar(passeio2);
-			pacoteDao.inserirAtualizar(pacote1);
-			pacoteDao.inserirAtualizar(pacote2);
-			itemDao.inserirAtualizar(item1);
-			itemDao.inserirAtualizar(item2);
-			contratoDao.inserirAtualizar(contrato1);
-			contratoDao.inserirAtualizar(contrato2);
-			
-			Transaction.commit();*/
+			/*cliente.inserirAtualizar(cliente1);
+			cliente.inserirAtualizar(cliente2);
+			hotel.inserirAtualizar(hotel1);
+			hotel.inserirAtualizar(hotel2);
+			passeio.inserirAtualizar(passeio1);
+			passeio.inserirAtualizar(passeio2);
+			pacote.inserirAtualizar(pacote1);
+			pacote.inserirAtualizar(pacote2);
+			item.inserirAtualizar(item1);
+			item.inserirAtualizar(item2);
+			contrato.inserirAtualizar(contrato1);
+			contrato.inserirAtualizar(contrato2);*/
 		
 			response.getWriter().append("\nBanco de dados do sucesso");
 			
@@ -98,14 +89,14 @@ public class ServletTeste extends HttpServlet {
 			response.getWriter().append("\nPreço passeios pacote1: " + pacote2.precoPasseios());
 			response.getWriter().append("\nPreço total pacote1: " + pacote2.precoTotal());
 			
-			Cliente joao = clienteDao.buscar(1);
+			Cliente joao = cliente.buscar(1);
 			
 			response.getWriter().append("\n\nJoão: " + joao);
-			response.getWriter().append("\n\nTodos os Clientes: " + clienteDao.buscarTodos());
+			response.getWriter().append("\n\nTodos os Clientes: " + cliente.buscarTodos());
 			
-			List<Hotel> hotel = hotelDao.buscaHoteis("a", new BigDecimal("100"), new BigDecimal("1500"));
+			List<Hotel> hotelResult = hotel.buscaHoteis("a", new BigDecimal("100"), new BigDecimal("1500"));
 			
-			response.getWriter().append("\n\nHotel: " + hotel);
+			response.getWriter().append("\n\nHotel: " + hotelResult);
 			
 		} catch (ParseException e) {
 			response.getWriter().append("\nDeu ruim galera corre");

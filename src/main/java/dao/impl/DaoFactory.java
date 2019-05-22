@@ -15,26 +15,32 @@ import dao.PasseioDao;
 
 public class DaoFactory {
 	
+	// Retorna a implementação do ClienteDao
 	public static ClienteDao criarClienteDao() {
 		return new ClienteDaoImpl();
 	}
 	
+	// Retorna a implementação do ContratoDao
 	public static ContratoDao criarContratoDao() {
 		return new ContratoDaoImpl();
 	}
 	
+	// Retorna a implementação do HotelDao
 	public static HotelDao criarHotelDao() {
 		return new HotelDaoImpl();
 	}
 	
+	// Retorna a implementação do ItemDao
 	public static ItemDao criarItemDao() {
 		return new ItemDaoImpl();
 	}
 	
+	// Retorna a implementação do PacoteDao
 	public static PacoteDao criarPacoteDao() {
 		return new PacoteDaoImpl();
 	}
 	
+	// Retorna a implementação do PasseioDao
 	public static PasseioDao criarPasseioDao() {
 		return new PasseioDaoImpl();
 	}
