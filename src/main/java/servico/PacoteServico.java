@@ -14,36 +14,67 @@ import dao.impl.Transaction;
 import dominio.Pacote;
 
 public class PacoteServico {
-	
+
 	// Cria um DAO de Pacote
 	private PacoteDao dao;
-	
+
 	// Quando iniciado recebe a implementação
 	public PacoteServico() {
 		this.dao = DaoFactory.criarPacoteDao();
 	}
-	
-	// Realiza a operação de inserção ou atualização
-	public void inserirAtualizar(Pacote x) {
-		Transaction.begin();
-		dao.inserirAtualizar(x);
-		Transaction.commit();
+
+	// Realiza a operação de inserção
+	public void inserir(Pacote x) {
+		// Tentar inserir no banco de dados
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+			// Caso aconteça um erro
+		} catch (RuntimeException e) {
+			// E a transação estiver ativa
+			if (Transaction.isActive()) {
+				// Cancela a transação
+				Transaction.rollback();
+			}
+			// E mostra o erro na tela
+			System.out.println("Erro: " + e.getMessage());
+		}
 	}
-	
+
+	// Realiza a operação de atualização
+	public void atualizar(Pacote x) {
+		// Tentar inserir no banco de dados
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+			// Caso aconteça um erro
+		} catch (RuntimeException e) {
+			// E a transação estiver ativa
+			if (Transaction.isActive()) {
+				// Cancela a transação
+				Transaction.rollback();
+			}
+			// E mostra o erro na tela
+			System.out.println("Erro: " + e.getMessage());
+		}
+	}
+
 	// Realiza a operação de exclusão
 	public void excluir(Pacote x) {
 		Transaction.begin();
 		dao.excluir(x);
 		Transaction.commit();
 	}
-	
+
 	// Busca um Pacote no banco de dados
 	public Pacote buscar(int cod) {
 		return dao.buscar(cod);
 	}
-	
+
 	// Busca todos os Pacotes no banco de dados
-	public List<Pacote> buscarTodos(){
+	public List<Pacote> buscarTodos() {
 		return dao.buscarTodos();
 	}
 }

@@ -23,11 +23,42 @@ public class ClienteServico {
 		this.dao = DaoFactory.criarClienteDao();
 	}
 	
-	// Realiza a operação de inserção ou atualização
-	public void inserirAtualizar(Cliente x) {
-		Transaction.begin();
-		dao.inserirAtualizar(x);
-		Transaction.commit();
+	// Realiza a operação de inserção
+	public void inserir(Cliente x) {
+		// Tentar inserir no banco de dados
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+		// Caso aconteça um erro
+		} catch(RuntimeException e) {
+			// E a transação estiver ativa
+			if(Transaction.isActive()){
+				// Cancela a transação
+				Transaction.rollback();
+			}
+			// E mostra o erro na tela
+			System.out.println("Erro: " + e.getMessage());
+		}
+	}
+	
+	// Realiza a operação de atualização
+	public void atualizar(Cliente x) {
+		// Tentar inserir no banco de dados
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+		// Caso aconteça um erro
+		} catch(RuntimeException e) {
+			// E a transação estiver ativa
+			if(Transaction.isActive()){
+				// Cancela a transação
+				Transaction.rollback();
+			}
+			// E mostra o erro na tela
+			System.out.println("Erro: " + e.getMessage());
+		}
 	}
 	
 	// Realiza a operação de exclusão

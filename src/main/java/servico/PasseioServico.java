@@ -14,36 +14,67 @@ import dao.impl.Transaction;
 import dominio.Passeio;
 
 public class PasseioServico {
-	
+
 	// Cria um DAO de Passeio
 	private PasseioDao dao;
-	
+
 	// Quando iniciado recebe a implementação
 	public PasseioServico() {
 		this.dao = DaoFactory.criarPasseioDao();
 	}
-	
-	// Realiza a operação de inserção ou atualização
-	public void inserirAtualizar(Passeio x) {
-		Transaction.begin();
-		dao.inserirAtualizar(x);
-		Transaction.commit();
+
+	// Realiza a operação de inserção
+	public void inserir(Passeio x) {
+		// Tentar inserir no banco de dados
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+			// Caso aconteça um erro
+		} catch (RuntimeException e) {
+			// E a transação estiver ativa
+			if (Transaction.isActive()) {
+				// Cancela a transação
+				Transaction.rollback();
+			}
+			// E mostra o erro na tela
+			System.out.println("Erro: " + e.getMessage());
+		}
 	}
-	
+
+	// Realiza a operação de atualização
+	public void atualizar(Passeio x) {
+		// Tentar inserir no banco de dados
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+			// Caso aconteça um erro
+		} catch (RuntimeException e) {
+			// E a transação estiver ativa
+			if (Transaction.isActive()) {
+				// Cancela a transação
+				Transaction.rollback();
+			}
+			// E mostra o erro na tela
+			System.out.println("Erro: " + e.getMessage());
+		}
+	}
+
 	// Realiza a operação de exclusão
 	public void excluir(Passeio x) {
 		Transaction.begin();
 		dao.excluir(x);
 		Transaction.commit();
 	}
-	
+
 	// Busca um Passeio no banco de dados
 	public Passeio buscar(int cod) {
 		return dao.buscar(cod);
 	}
-	
+
 	// Busca todos os Passeios no banco de dados
-	public List<Passeio> buscarTodos(){
+	public List<Passeio> buscarTodos() {
 		return dao.buscarTodos();
 	}
 }

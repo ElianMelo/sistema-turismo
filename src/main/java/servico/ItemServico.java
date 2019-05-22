@@ -14,36 +14,67 @@ import dao.impl.Transaction;
 import dominio.Item;
 
 public class ItemServico {
-	
+
 	// Cria um DAO de Item
 	private ItemDao dao;
-	
+
 	// Quando iniciado recebe a implementação
 	public ItemServico() {
 		this.dao = DaoFactory.criarItemDao();
 	}
-	
-	// Realiza a operação de inserção ou atualização
-	public void inserirAtualizar(Item x) {
-		Transaction.begin();
-		dao.inserirAtualizar(x);
-		Transaction.commit();
+
+	// Realiza a operação de inserção
+	public void inserir(Item x) {
+		// Tentar inserir no banco de dados
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+			// Caso aconteça um erro
+		} catch (RuntimeException e) {
+			// E a transação estiver ativa
+			if (Transaction.isActive()) {
+				// Cancela a transação
+				Transaction.rollback();
+			}
+			// E mostra o erro na tela
+			System.out.println("Erro: " + e.getMessage());
+		}
 	}
-	
+
+	// Realiza a operação de atualização
+	public void atualizar(Item x) {
+		// Tentar inserir no banco de dados
+		try {
+			Transaction.begin();
+			dao.inserirAtualizar(x);
+			Transaction.commit();
+			// Caso aconteça um erro
+		} catch (RuntimeException e) {
+			// E a transação estiver ativa
+			if (Transaction.isActive()) {
+				// Cancela a transação
+				Transaction.rollback();
+			}
+			// E mostra o erro na tela
+			System.out.println("Erro: " + e.getMessage());
+		}
+	}
+
 	// Realiza a operação de exclusão
 	public void excluir(Item x) {
 		Transaction.begin();
 		dao.excluir(x);
 		Transaction.commit();
 	}
-	
+
 	// Busca um Item no banco de dados
 	public Item buscar(int cod) {
 		return dao.buscar(cod);
 	}
-	
+
 	// Busca todos os Itens no banco de dados
-	public List<Item> buscarTodos(){
+	public List<Item> buscarTodos() {
 		return dao.buscarTodos();
 	}
 }
