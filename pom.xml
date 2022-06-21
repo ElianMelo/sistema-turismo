@@ -42,7 +42,7 @@ Referência ao enunciado/origem do exercício: PDS1 – PROVA SIMULADA QUESTÃO 
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.17</version>
+		    <version>8.0.28</version>
 		</dependency>
 		
 		<!-- Dependência do JTA (Java Transaction API) -->
